@@ -1,12 +1,13 @@
-# B6-2 Mission Work Packet - Confirmed at G1 SOURCE
+# B6-2 Mission Work Packet
 
 ## 1. Identity
 
 - Mission: `B6-2`
 - Title: 내가 고친 코드 설명을 AI가 대신 써주는 도우미 만들기
 - Mission repository: `MetaStudy999/codyssey-basic-b6-2-ai-code-summarizer`
-- Control Tower: `MetaStudy999/codyssey-basic` - READ ONLY
-- Control Tower frozen baseline: `0d1581b3e82366988f57e1d76da311c028b8e15e`
+- Work branch: `mission/b6-2`
+- Control Tower: `MetaStudy999/codyssey-basic` — **READ ONLY**
+- Frozen Control Tower baseline: `0d1581b3e82366988f57e1d76da311c028b8e15e`
 - Mission repository baseline: `8e12cbcc80956f0192469462ddf015e1b6055ce5`
 - Active wave: `20260808-01`
 
@@ -17,47 +18,48 @@
 | `b6-2-mission.pdf` (8 pages) | VALID | Primary Mission Source |
 | `b6-2-mission.md` | VALID / DUPLICATE transcription | Secondary Mission Source |
 | Dedicated B6-2 official Evaluation/rubric in mission repo | MISSING | Source Gap |
-| Dedicated B6-2 Evaluation located by Control Tower repository search | MISSING | Source Gap |
-| Dedicated B6-2 Evaluation located by available uploaded-file search | MISSING | Source Gap |
-| 2026 Orientation material | VALID but high-level | Confirms B6-2 is required Cloud & AI API mission; not a substitute Evaluation |
+| Dedicated B6-2 Evaluation in Control Tower search | MISSING | Source Gap |
+| Dedicated B6-2 Evaluation in available uploaded-file search | MISSING | Source Gap |
+| 2026 Orientation material | VALID, high-level only | Confirms B6-2 required/40h; not Evaluation substitute |
 
-### Source Mode
+### Source decision
 
 - Mode: `MISSION-LED`
 - Confidence: `MEDIUM`
+- Evaluation status: `UNVERIFIED / MISSING`
 - Gap: dedicated official Evaluation/평가문항 was not located.
-- Rule: Evaluation criteria are **not inferred** from README/code/general knowledge. If an official Evaluation appears later, G1 mapping must be reopened and diffed.
+- Rule: Evaluation criteria are not inferred. If an official Evaluation appears, G1 mapping is reopened only as needed.
 
-## 3. Mission Contract - Confirmed Requirements
+## 3. Mission Contract / Requirement Traceability
 
-| ID | Requirement | Source |
+| ID | Confirmed requirement | Implementation / evidence |
 |---|---|---|
-| REQ-B6-2-001 | Git-initialized project root에서 CLI 실행 | Mission §4.1 |
-| REQ-B6-2-002 | `git status`로 변경 파일 상태 수집 | Mission §4.1 |
-| REQ-B6-2-003 | `git diff`로 변경 내용 수집 | Mission §4.1 |
-| REQ-B6-2-004 | 변경 없음 메시지 후 종료 | Mission §4.1 |
-| REQ-B6-2-005 | API key는 환경변수, 하드코딩 금지 | Mission §4.2/§7 |
-| REQ-B6-2-006 | AI API 실패 시 원인을 포함한 사용자 오류 | Mission §4.2 |
-| REQ-B6-2-007 | model/temperature/max_tokens CLI option + defaults | Mission §4.2 |
-| REQ-B6-2-008 | `commit` 명령 -> 변경 기반 1줄 title 출력 | Mission §4.3 |
-| REQ-B6-2-009 | commit body 사용 시 파일/모듈 또는 1~2개 핵심 bullet | Mission §4.3 |
-| REQ-B6-2-010 | `pr` 명령 -> 1줄 title + body | Mission §4.4 |
-| REQ-B6-2-011 | PR `Why`/`What`/`How to Test` + 섹션별 bullet | Mission §4.4 |
-| REQ-B6-2-012 | commit title 최대 72자(50자 권장), PR title 최대 80자 검증 | Mission §4.5 |
-| REQ-B6-2-013 | 최종 출력은 헤더/구분선으로 검토 가능 | Mission §4.5 |
-| REQ-B6-2-014 | README 설치/환경변수/명령/출력/운영 주의사항 | Mission §4.6 |
-| REQ-B6-2-015 | Python 3.10+, 터미널 프로그램 | Mission §6 |
-| REQ-B6-2-016 | commit/pr 자동 원격 적용하지 않고 draft까지만 | Mission §7 |
-| REQ-B6-2-017 | Safe Mode: masking 또는 diff 제한 중 1개 이상 | Mission §7 |
-| REQ-B6-2-018 | 실제 생성 결과는 사람이 검토 후 적용 | Mission §7 |
+| REQ-B6-2-001 | Git-initialized root에서 CLI 실행 | `git_context.py`; non-Git actual check |
+| REQ-B6-2-002 | `git status` 수집 | `collect_git_context`; temp-repo tests |
+| REQ-B6-2-003 | `git diff` 수집 | unstaged + staged diff; temp-repo tests |
+| REQ-B6-2-004 | 변경 없음 안내 후 종료 | clean-repo actual test, API key 불필요 |
+| REQ-B6-2-005 | API key 환경변수 / 하드코딩 금지 | `AI_API_KEY`; `.gitignore`; `.env.example` |
+| REQ-B6-2-006 | API 실패 원인 안내 | HTTP/network/timeout/provider errors + tests |
+| REQ-B6-2-007 | model/temperature/max_tokens CLI options | aliases/defaults + parser tests |
+| REQ-B6-2-008 | `commit` -> 변경 기반 1줄 title | prompt + validator + mocked generation test |
+| REQ-B6-2-009 | commit body 사용 시 품질 기준 | 1–2 bullets required by this implementation |
+| REQ-B6-2-010 | `pr` -> 1줄 title + body | prompt + validator + mocked generation test |
+| REQ-B6-2-011 | PR Why/What/How to Test + bullets | exact headers/order/bullet validation |
+| REQ-B6-2-012 | title/PR 형식 및 길이 검증 | commit <=72, PR <=80, repair once |
+| REQ-B6-2-013 | 검토 가능한 구분 출력 | terminal headers/separators |
+| REQ-B6-2-014 | README 필수 항목 | install/env/commands/output/security/cost/runtime |
+| REQ-B6-2-015 | Python 3.10+, terminal | Python CLI; standard library runtime |
+| REQ-B6-2-016 | draft까지만; 원격 자동 반영 금지 | no push/PR creation implementation |
+| REQ-B6-2-017 | Safe Mode 1개 이상 | masking + 10-file metadata / 200-line diff bound |
+| REQ-B6-2-018 | 사람 최종 검토 | prompt/output/README explicitly preserve human review |
 
 ## 4. Evaluation Mapping
 
-Dedicated Evaluation Source가 없으므로 `UNVERIFIED` 상태다. 현재 G2/G3는 Mission-derived acceptance만 사용한다.
+Dedicated official Evaluation source is missing. Evaluation mapping remains `UNVERIFIED`; no invented criteria are used as PASS evidence.
 
 ## 5. Repository Baseline
 
-G1 조사 시 root에는 다음 3개만 존재했다.
+At G1 the root contained only:
 
 ```text
 README.md
@@ -65,7 +67,7 @@ b6-2-mission.md
 b6-2-mission.pdf
 ```
 
-즉 기존 Python CLI, Git integration layer, AI provider abstraction, prompts, tests, `.env` policy는 **없었다**. G2는 신규 최소 충분 구현이다.
+There was no existing Python CLI, Git integration layer, AI provider abstraction, prompts, tests, or `.env` policy. G2 therefore created a minimum-sufficient implementation from scratch.
 
 ## 6. Architecture / Mission-specific TOC
 
@@ -73,10 +75,10 @@ b6-2-mission.pdf
 CLI
 ├── Git Context Collector
 │   ├── git status
-│   ├── git diff
+│   ├── git diff / git diff --cached
 │   └── no-change guard
 ├── Safe Mode
-│   ├── masking
+│   ├── secret/email masking
 │   └── 10 files / 200 lines bound
 ├── Prompt Builder
 │   ├── Commit contract
@@ -84,7 +86,7 @@ CLI
 ├── AI Provider abstraction
 │   └── configurable OpenAI-compatible REST adapter
 ├── Generation Service
-│   └── max 1 repair -> max 2 API calls
+│   └── one initial call + max one repair
 └── Validators / terminal draft output
 ```
 
@@ -94,79 +96,92 @@ CLI
 
 - Python CLI
 - Git status/diff context
-- AI API REST adapter
+- AI REST provider adapter
 - commit/PR prompt engineering
-- output validation
+- output validation/repair
 - safe mode / environment secret policy
-- unit/integration-style tests with mocked API
+- unit/integration-style tests with real temporary Git repos and mocked AI HTTP
+- README / learning / evidence documentation
 
 ### Non-scope
 
-- git push automation
-- GitHub PR creation API
+- `git push` automation
+- GitHub PR creation API from the B6-2 tool
 - automatic commit/merge
-- bonus convention config / real cross-repo PR unless separately requested
+- bonus convention configuration or cross-repo PR
 
 ## 8. Dependency / Drift Check
 
 - Official predecessor dependency: `NONE` found in Mission Source.
-- Runtime dependencies: Git, Python 3.10+, actual AI provider credential/network only for G5.
-- Control Tower drift: frozen baseline remains the execution baseline.
+- Runtime dependency: Git, Python 3.10+, and an actual AI provider credential/network for G5.
+- Control Tower drift: frozen baseline retained; Control Tower was not modified.
 
-## 9. Agent Routing
+## 9. Agent Routing / Review
 
-- Primary builder: ChatGPT in this Workcell.
-- Automated harness: standard-library `unittest` + real temporary Git repositories + mocked AI HTTP.
-- Independent reviewer: one minimal review after G3, using root `AGENTS.md` contract.
-- Human Runtime: only actual AI key/provider/network check if required.
+- Primary builder: ChatGPT Workcell.
+- Automated harness: stdlib `unittest`, temporary real Git repositories, mocked HTTP/provider responses.
+- ChatGPT self review: `BLOCKER=0`, `MAJOR=0`; see `docs/review.md`.
+- Independent reviewer: **not executed** because no separate Codex/Copilot reviewer surface is available in this session. This is recorded rather than fabricated.
+- Human Runtime: required only for real provider generation.
 
-## 10. Test Plan
+## 10. Test Result
 
-- non-Git failure
-- clean repo no-change / API not required
-- modified + staged status/diff collection
-- commit output title/body contract
-- PR title/Why/What/How to Test/bullet contract
-- model/temperature/max_tokens option parsing/default
-- malformed AI output -> one repair call
-- missing key
-- HTTP auth/network/timeout errors
-- safe mode masking/truncation
-- `.env` ignore/placeholder policy
-- README commands vs parser contract
+Actual local harness:
+
+```text
+python -m unittest discover -v
+Ran 22 tests in 0.069s
+OK
+```
+
+Additional actual checks:
+
+- `python -m compileall -q ai_git_assistant main.py` — PASS
+- `python main.py --help` — PASS
+- `python main.py commit --help` — PASS
+- non-Git directory — expected error, exit 3
+- clean Git repo — no-change exit 0, no API key required
+- changed Git repo with missing key — expected error, exit 2
+
+Evidence: `docs/evidence/automated-test.md`.
 
 ## 11. Runtime Plan
 
-`NEEDS-RUNTIME` only for actual provider call:
+State: `NEEDS-RUNTIME`.
 
-1. Create/keep one meaningful Git change.
-2. Set `AI_API_KEY` without exposing it.
-3. Run `commit` once.
-4. Run `pr` once.
-5. Confirm output contract and call count.
-6. Capture sanitized evidence.
+A real AI credential is intentionally not stored or requested in repository content. Required final smoke flow:
 
-## 12. Evidence Plan
+1. Keep one meaningful local Git modification.
+2. Set `AI_API_KEY` locally without exposing it.
+3. Run `python main.py commit --model <MODEL>`.
+4. Run `python main.py pr --model <MODEL>`.
+5. Confirm title/section/bullet contract and API call count <=2.
+6. Capture sanitized evidence only.
 
-- Automated: test command/output.
-- Runtime: sanitized terminal output/screenshot only.
-- Never store API key/token values.
+## 12. Evidence Plan / Current Evidence
 
-## 13. G1-G8 Checklist
+- Automated evidence: **TESTED** — `docs/evidence/automated-test.md`
+- Review evidence: **PARTIAL** — `docs/review.md`
+- Live provider evidence: **NEEDS-RUNTIME**
+- Secret values must never appear in evidence.
 
-- [x] G1 SOURCE - Mission VALID, Evaluation MISSING, `MISSION-LED`, MEDIUM confidence
-- [ ] G2 BUILD
-- [ ] G3 TEST
-- [ ] G4 REVIEW
-- [ ] G5 RUNTIME
-- [ ] G6 EVIDENCE
-- [ ] G7 LEARN
-- [ ] G8 MERGE
+## 13. G1-G8 Status
+
+| Gate | State | Note |
+|---|---|---|
+| G1 SOURCE | PASS | Mission VALID; Evaluation MISSING; MISSION-LED / MEDIUM |
+| G2 BUILD | TESTED | minimum-sufficient implementation complete |
+| G3 TEST | PASS | 22 tests + compile/help/runtime-negative checks |
+| G4 REVIEW | PARTIAL | self-review BLOCKER=0/MAJOR=0; independent agent not available |
+| G5 RUNTIME | NEEDS-RUNTIME | real AI provider key/network needed |
+| G6 EVIDENCE | PARTIAL | automated evidence complete, live generation evidence pending |
+| G7 LEARN | PASS | `docs/learning.md` complete and implementation-aligned |
+| G8 MERGE | TODO | Draft PR #1 remains open until completion gates close |
 
 ## 14. STOP Rule
 
-Mission requirements satisfied + BLOCKER=0 + MAJOR=0 + required tests + actual required runtime/evidence -> stop. MINOR/IMPROVEMENT does not delay completion.
+Stop only after confirmed Mission requirements + required runtime/evidence + `BLOCKER=0` + `MAJOR=0`. Do not delay for MINOR/IMPROVEMENT. Do not claim Evaluation PASS while the official Evaluation remains missing.
 
 ## 15. Handoff Contract
 
-After G8, repository root must contain `HANDOFF.md` and `mission-result.yaml` with final SHA/PR, Source Mode/Gap, Gate results, tests, runtime/evidence, reviewer findings, and remaining backlog. Control Tower is not modified by this Workcell.
+After G8, create root `HANDOFF.md` and `mission-result.yaml` with final commit/PR/merge state, Source Mode/Gap, G1–G8 results, tests, runtime/evidence, review findings, and remaining risks. The Control Tower remains untouched by this Workcell.
