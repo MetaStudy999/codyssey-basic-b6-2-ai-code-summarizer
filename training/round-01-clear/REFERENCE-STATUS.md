@@ -1,44 +1,49 @@
 # B6-2 R01 — Reference Status
 
+## 판정
+
+**Reference Build: CORE READY**  
+**Runtime Mission: ⬜ NOT STARTED**  
+**Runtime CLEAR: 아님**
+
+## 공식 Source
+
+- `b6-2-mission.pdf`
+- `b6-2-mission.md`
+- 별도 공식 Evaluation 파일 없음
+
+`docs/evaluation-qa.md`는 Mission 요구사항을 바탕으로 만든 설명 연습 자료이며 공식 평가 원본으로 취급하지 않습니다.
+
 ## Phase A 준비 결과
 
-- [x] Source/Evaluation 분석
-- [x] Git status/diff collector
-- [x] staged + unstaged diff
+- [x] Mission 요구사항 분석
+- [x] Git status/staged/unstaged diff collector
 - [x] no-change early exit
 - [x] env-only API Key/endpoint
 - [x] REST AI client
-- [x] API/network/timeout/JSON 오류 처리
+- [x] Network/Auth/Timeout/JSON 오류 처리
 - [x] `commit` / `pr` CLI
-- [x] `--model`, `--temperature`, `--max-tokens`
-- [x] Commit prompt/format validator
-- [x] PR Why/What/How to Test prompt/validator
-- [x] no unverified test-pass claim rule
-- [x] unit tests
-- [x] offline `verify.sh`
+- [x] model/temperature/max-tokens options
+- [x] Commit/PR Prompt와 format validator
+- [x] unit/offline tests와 `verify.sh`
 - [x] Secret-like pattern scan
-- [x] Reference usage guide
-- [x] Requirement Mapping
-- [x] Evaluation Q&A
-- [x] Evidence Guide
-- [x] Beginner Reference Guide
-- [x] Reference Checklist
+- [x] Requirement Mapping / Q&A / Evidence Guide
+- [x] canonical `BEGINNER-GUIDE.md`
+- [x] canonical `CHECKLIST.md`
+- [x] Reference/Runtime 구분
 
 ## Phase C에서만 완료
 
-- [ ] 실제 Provider endpoint/model 확인
+- [ ] 실제 Provider endpoint/model
 - [ ] 실제 API Key local input
 - [ ] 실제 AI API call
-- [ ] 실제 diff 기반 Commit 생성
-- [ ] 실제 diff 기반 PR 생성
-- [ ] 실제 Commit/PR 적용
-- [ ] 실제 error path
+- [ ] 실제 diff 기반 Commit 생성/적용
+- [ ] 실제 diff 기반 PR 생성/적용
+- [ ] 실제 오류 경로
 - [ ] Runtime Evidence
-- [ ] 사용자 자기 말 평가 설명
+- [ ] 사용자의 자기 말 설명
 - [ ] `✅ B6-2 CLEAR`
 
-## 판정
+## Canonical Audit
 
-**Reference 핵심 기준본 준비 완료 / Mission 상태 ⬜ NOT STARTED 유지 / Runtime 미시작 / CLEAR 아님**
-
-Phase B에서 기존 scaffold `BEGINNER-GUIDE.md`, `CHECKLIST.md`, root README와 Reference 문서를 canonical 구조로 최종 동기화합니다.
+기존 scaffold `BEGINNER-GUIDE.md`와 `CHECKLIST.md`를 상세 Reference 가이드와 동기화했고, 존재하지 않는 `b6-2-evaluation.md` 참조를 제거했습니다.
